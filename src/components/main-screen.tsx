@@ -7,6 +7,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 
+import { AppBackground } from '@/components/app-background';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, MaxContentWidth, Spacing, TopTabInset } from '@/constants/theme';
@@ -31,8 +32,9 @@ export function MainScreen({ title, subtitle, hideHeader = false, children }: Ma
 
   return (
     <ThemedView style={[styles.container, { backgroundColor: theme.background }]}>
+      <AppBackground />
       <SafeAreaView style={styles.safeArea}>
-        <ScrollView contentContainerStyle={styles.contentContainer}>
+        <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
           {hideHeader ? null : (
             <View style={styles.header}>
               <ThemedText type="title">{title}</ThemedText>
@@ -104,6 +106,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  scrollView: {
+    flex: 1,
+  },
   safeArea: {
     flex: 1,
   },
@@ -129,6 +134,11 @@ const styles = StyleSheet.create({
     padding: Spacing.four,
     borderRadius: Spacing.two,
     gap: Spacing.two,
+    shadowColor: '#0B2A5B',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 3,
   },
   cardList: {
     gap: Spacing.three,
@@ -145,5 +155,10 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.two,
     minWidth: 120,
     gap: Spacing.half,
+    shadowColor: '#0B2A5B',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 2,
   },
 });

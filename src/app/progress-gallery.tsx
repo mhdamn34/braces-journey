@@ -1,36 +1,28 @@
-import { StyleSheet, View } from 'react-native';
-
 import { CardList, InfoCard, MainScreen, SectionHeading } from '@/components/main-screen';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Spacing } from '@/constants/theme';
-
-const galleryItems = [
-  { month: 'May', note: 'After wire adjustment' },
-  { month: 'Apr', note: 'Elastic routine started' },
-  { month: 'Mar', note: 'Initial alignment check' },
-  { month: 'Feb', note: 'Braces fitted' },
-];
+import { CartoonSmileMap } from '@/features/progress-gallery/components/cartoon-smile-map';
+import { PhotoAnalysisCard } from '@/features/progress-gallery/components/photo-analysis-card';
+import { PhotoLogCard } from '@/features/progress-gallery/components/photo-log-card';
+import {
+  cartoonMapPoints,
+  latestPhotoAnalysis,
+  photoLogs,
+} from '@/features/progress-gallery/data/progress-gallery';
 
 export default function ProgressGalleryScreen() {
   return (
     <MainScreen
       title="Progress Gallery"
-      subtitle="Compare monthly braces photos and keep each image tied to appointment notes.">
-      <SectionHeading>Monthly photos</SectionHeading>
-      <View style={styles.galleryGrid}>
-        {galleryItems.map((item, index) => (
-          <ThemedView key={item.month} type="backgroundElement" style={styles.photoCard}>
-            <View style={[styles.photoPlaceholder, index === 0 && styles.currentPhoto]}>
-              <ThemedText type="smallBold">{item.month}</ThemedText>
-            </View>
-            <ThemedText type="smallBold">{item.month} progress</ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {item.note}
-            </ThemedText>
-          </ThemedView>
+      subtitle="Compare monthly braces photos, review analysis, and translate progress into a cartoon smile map.">
+      <PhotoAnalysisCard summary={latestPhotoAnalysis} />
+
+      <CartoonSmileMap points={cartoonMapPoints} />
+
+      <SectionHeading>Photo log</SectionHeading>
+      <CardList>
+        {photoLogs.map((log) => (
+          <PhotoLogCard key={log.id} log={log} />
         ))}
-      </View>
+      </CardList>
 
       <SectionHeading>Capture checklist</SectionHeading>
       <CardList>
@@ -46,28 +38,3 @@ export default function ProgressGalleryScreen() {
     </MainScreen>
   );
 }
-
-const styles = StyleSheet.create({
-  galleryGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.three,
-  },
-  photoCard: {
-    flexGrow: 1,
-    flexBasis: 220,
-    padding: Spacing.three,
-    borderRadius: Spacing.two,
-    gap: Spacing.two,
-  },
-  photoPlaceholder: {
-    aspectRatio: 4 / 3,
-    borderRadius: Spacing.two,
-    backgroundColor: '#E4EEF8',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  currentPhoto: {
-    backgroundColor: '#DCEDE7',
-  },
-});

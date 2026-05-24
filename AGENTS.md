@@ -90,12 +90,22 @@ Last updated: 2026-05-24
 
 ## Scalable Frontend Structure
 - Shared app screen shell/cards: `src/components/main-screen.tsx`
+- Shared branded screen background: `src/components/app-background.tsx`
 - Dashboard feature files:
   - `src/features/dashboard/types.ts`
   - `src/features/dashboard/data/dashboard.ts`
   - `src/features/dashboard/components/`
 - Payments feature data:
   - `src/features/payments/data/payments.ts`
+- Progress gallery feature files:
+  - `src/features/progress-gallery/types.ts`
+  - `src/features/progress-gallery/data/progress-gallery.ts`
+  - `src/features/progress-gallery/components/`
+
+## Progress Gallery Direction
+- The progress gallery now models photo logs with analysis scores and a cartoon smile map.
+- Current implementation is front-end/data scaffolding only.
+- Future image analysis should plug into the `src/features/progress-gallery/` feature boundary and update the photo log/cartoon map data instead of hardcoding results in route files.
 
 ## Maintenance Rule
 - Update this `AGENTS.md` after each completed feature or structural change so future agents can continue quickly.

@@ -43,11 +43,11 @@ export const mainTabs = [
     symbol: { ios: 'photo.on.rectangle', android: 'photo_library', web: 'photo_library' },
   },
   {
-    name: 'settings',
-    href: '/settings',
-    label: 'Settings',
-    sf: { default: 'gearshape', selected: 'gearshape.fill' },
-    md: 'settings',
-    symbol: { ios: 'gearshape', android: 'settings', web: 'settings' },
+    name: 'more',
+    href: '/more',
+    label: 'More',
+    sf: { default: 'ellipsis.circle', selected: 'ellipsis.circle.fill' },
+    md: 'more_horiz',
+    symbol: { ios: 'ellipsis.circle', android: 'more_horiz', web: 'more_horiz' },
   },
 ] as const;

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import {
@@ -10,11 +11,20 @@ import {
 } from '@/components/main-screen';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
-import { paymentStats, paymentSummary, payments } from '@/features/payments/data/payments';
+import { PaymentMethodSelector } from '@/features/payments/components/payment-method-selector';
+import {
+  paymentMethods,
+  paymentStats,
+  paymentSummary,
+  payments,
+} from '@/features/payments/data/payments';
+import type { PaymentMethodId } from '@/features/payments/types';
 import { formatCurrency } from '@/utils/format-currency';
 
 export default function PaymentsScreen() {
+  const [selectedMethodId, setSelectedMethodId] = useState<PaymentMethodId>('qrpay');
   const paidPercent = Math.round((paymentSummary.paid / paymentSummary.total) * 100);
+  const selectedMethod = paymentMethods.find((method) => method.id === selectedMethodId);
 
   return (
     <MainScreen
@@ -35,6 +45,17 @@ export default function PaymentsScreen() {
           <View style={[styles.progressFill, { width: `${paidPercent}%` }]} />
         </View>
       </InfoCard>
+
+      <PaymentMethodSelector
+        methods={paymentMethods}
+        selectedMethodId={selectedMethodId}
+        onSelectMethod={setSelectedMethodId}
+      />
+
+      <InfoCard
+        title="Selected method"
+        description={`${selectedMethod?.label} - ${selectedMethod?.description}`}
+      />
 
       <SectionHeading>Payment timeline</SectionHeading>
       <CardList>

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   CardList,
   InfoCard,
@@ -6,60 +8,42 @@ import {
   StatCard,
   StatGrid,
 } from '@/components/main-screen';
-import { ThemedText } from '@/components/themed-text';
-
-const appointmentStats = [
-  { label: 'Scheduled', value: '3' },
-  { label: 'Completed', value: '8' },
-  { label: 'Missed', value: '0' },
-];
-
-const appointments = [
-  {
-    title: 'Wire adjustment',
-    when: 'May 29 - 10:00 AM',
-    location: 'Ortho Care Clinic',
-    status: 'Upcoming',
-  },
-  {
-    title: 'Bracket check',
-    when: 'Jun 26 - 9:30 AM',
-    location: 'Ortho Care Clinic',
-    status: 'Upcoming',
-  },
-  {
-    title: 'Elastic review',
-    when: 'Apr 5 - 9:00 AM',
-    location: 'Ortho Care Clinic',
-    status: 'Completed',
-  },
-];
+import { AppointmentCard } from '@/features/appointments/components/appointment-card';
+import { AppointmentPickerCard } from '@/features/appointments/components/appointment-picker-card';
+import {
+  appointmentDateOptions,
+  appointments,
+  appointmentStats,
+  appointmentTimeSlots,
+} from '@/features/appointments/data/appointments';
 
 export default function AppointmentsScreen() {
+  const [selectedDateId, setSelectedDateId] = useState(appointmentDateOptions[0].id);
+  const [selectedTimeId, setSelectedTimeId] = useState(appointmentTimeSlots[1].id);
+
   return (
     <MainScreen
       title="Appointments"
-      subtitle="Keep your orthodontist visits, adjustment notes, and follow-up reminders organized.">
+      subtitle="Choose a visit date and time, then keep each appointment status easy to scan.">
       <StatGrid>
         {appointmentStats.map((stat) => (
           <StatCard key={stat.label} label={stat.label} value={stat.value} />
         ))}
       </StatGrid>
 
+      <AppointmentPickerCard
+        dates={appointmentDateOptions}
+        times={appointmentTimeSlots}
+        selectedDateId={selectedDateId}
+        selectedTimeId={selectedTimeId}
+        onSelectDate={setSelectedDateId}
+        onSelectTime={setSelectedTimeId}
+      />
+
       <SectionHeading>Schedule</SectionHeading>
       <CardList>
         {appointments.map((appointment) => (
-          <InfoCard
-            key={`${appointment.title}-${appointment.when}`}
-            title={appointment.title}
-            meta={appointment.when}
-            description={appointment.location}>
-            <ThemedText
-              type="smallBold"
-              themeColor={appointment.status === 'Upcoming' ? 'text' : 'textSecondary'}>
-              {appointment.status}
-            </ThemedText>
-          </InfoCard>
+          <AppointmentCard key={appointment.id} appointment={appointment} />
         ))}
       </CardList>
 

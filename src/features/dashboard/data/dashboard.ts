@@ -1,4 +1,11 @@
-import type { ChartPoint, DashboardTask, TreatmentSummary } from '@/features/dashboard/types';
+import type {
+  ChartPoint,
+  DashboardFocusPanel,
+  DashboardMode,
+  DashboardModeOption,
+  DashboardTask,
+  TreatmentSummary,
+} from '@/features/dashboard/types';
 import { formatCurrency } from '@/utils/format-currency';
 
 export const treatmentSummary: TreatmentSummary = {
@@ -17,12 +24,53 @@ export const dashboardMetrics = [
   { label: 'Pain', value: '2/10', helper: 'today' },
 ];
 
+export const dashboardModes: DashboardModeOption[] = [
+  { id: 'overview', label: 'Overview', description: 'Progress' },
+  { id: 'comfort', label: 'Comfort', description: 'Pain' },
+  { id: 'money', label: 'Money', description: 'Payments' },
+];
+
+export const dashboardFocusPanels: Record<DashboardMode, DashboardFocusPanel> = {
+  overview: {
+    title: 'Treatment pace',
+    value: '68%',
+    helper: 'Alignment is ahead of the planned monthly pace.',
+    badge: 'On track',
+    tone: 'teal',
+    facts: ['5 photo logs', '3 appointments booked', 'Blue ligatures'],
+  },
+  comfort: {
+    title: 'Comfort score',
+    value: '2/10',
+    helper: 'Pain trend is improving after the last adjustment.',
+    badge: 'Stable',
+    tone: 'blue',
+    facts: ['Mild soreness', 'Elastics routine active', 'No urgent notes'],
+  },
+  money: {
+    title: 'Next payment',
+    value: formatCurrency(72, { showCents: false }),
+    helper: 'Monthly treatment payment due on Jun 10.',
+    badge: 'Due soon',
+    tone: 'pink',
+    facts: ['RM 1,120 paid', 'RM 480 remaining', 'QRPay ready'],
+  },
+};
+
 export const alignmentProgress: ChartPoint[] = [
   { label: 'Feb', value: 18 },
   { label: 'Mar', value: 30 },
   { label: 'Apr', value: 44 },
   { label: 'May', value: 58 },
   { label: 'Jun', value: 68 },
+];
+
+export const paymentProgress: ChartPoint[] = [
+  { label: 'Feb', value: 18 },
+  { label: 'Mar', value: 32 },
+  { label: 'Apr', value: 48 },
+  { label: 'May', value: 62 },
+  { label: 'Jun', value: 70 },
 ];
 
 export const painTrend: ChartPoint[] = [

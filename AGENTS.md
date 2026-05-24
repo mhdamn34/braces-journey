@@ -65,7 +65,7 @@ mobile/
 
 # Current Implementation Notes
 
-Last updated: 2026-05-24
+Last updated: 2026-05-25
 
 ## Mobile Navigation
 - The app is focused on `npm run ios` / Expo iOS development.
@@ -76,7 +76,7 @@ Last updated: 2026-05-24
   - Journey Timeline
   - Payments
   - Progress Gallery
-  - Settings
+  - More
 
 ## Branding
 - Logo asset: `assets/images/braces-journey-logo.png`
@@ -95,12 +95,29 @@ Last updated: 2026-05-24
   - `src/features/dashboard/types.ts`
   - `src/features/dashboard/data/dashboard.ts`
   - `src/features/dashboard/components/`
+- Appointments feature files:
+  - `src/features/appointments/types.ts`
+  - `src/features/appointments/data/appointments.ts`
+  - `src/features/appointments/components/`
 - Payments feature data:
   - `src/features/payments/data/payments.ts`
+  - `src/features/payments/components/`
+  - `src/features/payments/types.ts`
 - Progress gallery feature files:
   - `src/features/progress-gallery/types.ts`
   - `src/features/progress-gallery/data/progress-gallery.ts`
   - `src/features/progress-gallery/components/`
+- More/Profile feature files:
+  - `src/features/more/types.ts`
+  - `src/features/more/data/more.ts`
+  - `src/features/more/components/`
+
+## Current UX Notes
+- Dashboard has selectable modes: Overview, Comfort, and Money.
+- Appointments allow selecting a date and time from local mobile UI controls.
+- Appointment statuses use colors: Upcoming, Completed, and Missed.
+- Payments support selectable methods: Cash, QRPay, and Credit Card.
+- The More tab owns profile summary, shortcuts, reminders, and settings-style items.
 
 ## Progress Gallery Direction
 - The progress gallery now models photo logs with analysis scores and a cartoon smile map.

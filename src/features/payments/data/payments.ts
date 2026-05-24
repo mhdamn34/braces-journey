@@ -1,3 +1,4 @@
+import type { PaymentMethod } from '@/features/payments/types';
 import { formatCurrency } from '@/utils/format-currency';
 
 export const paymentSummary = {
@@ -31,5 +32,26 @@ export const payments = [
     due: 'Apr 5',
     amount: 96,
     status: 'Paid',
+  },
+];
+
+export const paymentMethods: PaymentMethod[] = [
+  {
+    id: 'cash',
+    label: 'Cash',
+    shortLabel: 'RM',
+    description: 'Pay at clinic counter',
+  },
+  {
+    id: 'qrpay',
+    label: 'QRPay',
+    shortLabel: 'QR',
+    description: 'Scan and pay instantly',
+  },
+  {
+    id: 'credit-card',
+    label: 'Credit Card',
+    shortLabel: 'CC',
+    description: 'Visa or Mastercard',
   },
 ];

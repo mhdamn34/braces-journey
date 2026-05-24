@@ -1,98 +1,55 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  CardList,
+  InfoCard,
+  MainScreen,
+  SectionHeading,
+  StatCard,
+  StatGrid,
+} from '@/components/main-screen';
+import { DashboardHeaderCard } from '@/features/dashboard/components/dashboard-header-card';
+import { MetricBarChart } from '@/features/dashboard/components/metric-bar-chart';
+import { PainTrendCard } from '@/features/dashboard/components/pain-trend-card';
+import {
+  alignmentProgress,
+  dashboardMetrics,
+  painTrend,
+  todayTasks,
+  treatmentSummary,
+} from '@/features/dashboard/data/dashboard';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function DashboardScreen() {
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
+    <MainScreen
+      title="Dashboard"
+      subtitle="Track appointments, progress photos, braces colors, notes, and payments in one place."
+      hideHeader>
+      <DashboardHeaderCard summary={treatmentSummary} />
+
+      <StatGrid>
+        {dashboardMetrics.map((stat) => (
+          <StatCard key={stat.label} label={stat.label} value={stat.value} helper={stat.helper} />
+        ))}
+      </StatGrid>
+
+      <MetricBarChart
+        title="Alignment progress"
+        description="Monthly movement score"
+        data={alignmentProgress}
+      />
+
+      <PainTrendCard data={painTrend} />
+
+      <SectionHeading>Today</SectionHeading>
+      <CardList>
+        {todayTasks.map((item) => (
+          <InfoCard key={item.title} title={item.title} description={item.description} />
+        ))}
+      </CardList>
+
+      <InfoCard
+        title="Reminder"
+        description="Add a progress photo after each appointment so your gallery stays easy to compare month by month."
+      />
+    </MainScreen>
   );
 }
-
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
-});

@@ -1,0 +1,53 @@
+export const mainTabs = [
+  {
+    name: 'index',
+    href: '/',
+    label: 'Dashboard',
+    sf: { default: 'square.grid.2x2', selected: 'square.grid.2x2.fill' },
+    md: 'dashboard',
+    symbol: { ios: 'square.grid.2x2', android: 'dashboard', web: 'dashboard' },
+  },
+  {
+    name: 'appointments',
+    href: '/appointments',
+    label: 'Appointments',
+    sf: { default: 'calendar', selected: 'calendar.circle.fill' },
+    md: 'event',
+    symbol: { ios: 'calendar', android: 'event', web: 'event' },
+  },
+  {
+    name: 'journey-timeline',
+    href: '/journey-timeline',
+    label: 'Journey Timeline',
+    sf: {
+      default: 'calendar.day.timeline.leading',
+      selected: 'calendar.day.timeline.leading.circle.fill',
+    },
+    md: 'timeline',
+    symbol: { ios: 'calendar.day.timeline.leading', android: 'timeline', web: 'timeline' },
+  },
+  {
+    name: 'payments',
+    href: '/payments',
+    label: 'Payments',
+    sf: { default: 'creditcard', selected: 'creditcard.fill' },
+    md: 'payments',
+    symbol: { ios: 'creditcard', android: 'payments', web: 'payments' },
+  },
+  {
+    name: 'progress-gallery',
+    href: '/progress-gallery',
+    label: 'Progress Gallery',
+    sf: { default: 'photo.on.rectangle', selected: 'photo.fill.on.rectangle.fill' },
+    md: 'photo_library',
+    symbol: { ios: 'photo.on.rectangle', android: 'photo_library', web: 'photo_library' },
+  },
+  {
+    name: 'settings',
+    href: '/settings',
+    label: 'Settings',
+    sf: { default: 'gearshape', selected: 'gearshape.fill' },
+    md: 'settings',
+    symbol: { ios: 'gearshape', android: 'settings', web: 'settings' },
+  },
+] as const;

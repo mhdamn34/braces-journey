@@ -26,6 +26,14 @@ export const Colors = {
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
+export const BrandColors = {
+  navy: '#0B2A5B',
+  teal: '#21B8C7',
+  blue: '#5A6EE8',
+  pink: '#E84DAD',
+  green: '#208A6B',
+} as const;
+
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */
@@ -62,4 +70,5 @@ export const Spacing = {
 } as const;
 
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
+export const TopTabInset = Platform.select({ web: 104, default: 0 }) ?? 0;
 export const MaxContentWidth = 800;
